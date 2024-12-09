@@ -23,8 +23,11 @@
 
     <!-- Botões -->
     <div class="d-flex justify-content-end mb-3">
-        <a href="{% url 'gerar_senha' %}" class="btn btn-primary me-2">Gerar Nova Senha</a>
-        <a href="{% url 'resetar_senhas' %}" class="btn btn-danger">Resetar Senhas</a>
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger">Sair</a>
+        <div>
+            <a href="{% url 'gerar_senha' %}" class="btn btn-primary me-2">Gerar Nova Senha</a>
+            <a href="{% url 'resetar_senhas' %}" class="btn btn-danger">Resetar Senhas</a>
+        </div>
     </div>
 
     <!-- Tabela de Senhas -->
