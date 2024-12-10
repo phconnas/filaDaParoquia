@@ -122,3 +122,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Redireciona para a página inicial ou para a listagem de senha
+LOGIN_REDIRECT_URL = '/' # ou 'listar_senhas' se essa for sua URL principal
