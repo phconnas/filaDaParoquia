@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'senhas', # App de gereciamento de senhas
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redireciona para a página inicial ou para a listagem de senha
 LOGIN_REDIRECT_URL = '/' # ou 'listar_senhas' se essa for sua URL principal
+
+ASGI_APPLICATION = 'senha_manager.asgi.application'
+
+# Configuração para Redis (necessário para gerenciar WebSockets)
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],  # Certifique-se de ter o Redis rodando
+        },
+    },
+}

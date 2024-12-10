@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Senha
 from django.contrib.auth.decorators import login_required
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 @login_required
 def listar_senhas(request):
@@ -10,9 +12,20 @@ def listar_senhas(request):
 
 @login_required
 def chamar_senha(request, senha_id):
-    senha = Senha.objects.get(id=senha_id)
+    senha = get_object_or_404(Senha, id=senha_id)
     senha.chamada = True
     senha.save()
+
+    # Notificar via WebSocket
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        'senha_updates',
+        {
+            'type': 'send_update',
+            'message': senha.numero
+        }
+    )
+
     messages.success(request, f"Senha {senha.numero} chamada com sucesso!")
     return redirect('listar_senhas')
 
@@ -34,3 +47,6 @@ def resetar_senhas(request):
     Senha.objects.all().delete()
     messages.warning(request, "Todas as senhas foram resetadas.")
     return redirect('listar_senhas')
+
+def interface_publica(request):
+    return render(request, 'senhas/publico.html')
