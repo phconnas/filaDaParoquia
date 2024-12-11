@@ -1,0 +1,11 @@
+<h1>Relatórios</h1>
+<p>Total de senhas: {{ total_senhas }}</p>
+<p>Senhas chamadas: {{ chamadas }}</p>
+<p>Senhas não chamadas: {{ nao_chamadas }}</p>
+
+<h2>Senhas por Dia</h2>
+<ul>
+    {% for dia in senhas_por_dia %}
+        <li>{{ dia.dia }}: {{ dia.total }}</li>
+    {% endfor %}
+</ul>

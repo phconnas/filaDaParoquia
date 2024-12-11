@@ -125,7 +125,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redireciona para a página inicial ou para a listagem de senha
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/' # ou 'listar_senhas' se essa for sua URL principal
+LOGOUT_REDIRECT_URL = '/login/' # ou 'listar_senhas' se essa for sua URL principal
 
 ASGI_APPLICATION = 'senha_manager.asgi.application'
 
